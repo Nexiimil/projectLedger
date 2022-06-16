@@ -4,25 +4,34 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 public class ExecutorSingleton {
-    private static ExecutorSingleton exec = null;
+  private static ExecutorSingleton exec = null;
 
-    public ExecutorSingleton() {
-    }
+  public ExecutorSingleton() {
+  }
 
-    public static ExecutorSingleton getInstance() {
-        if (exec == null){
-            exec = new ExecutorSingleton();
-        }
-        return exec;
+  public static ExecutorSingleton getInstance() {
+    if (exec == null){
+      exec = new ExecutorSingleton();
     }
+    return exec;
+  }
 
-    public ResultSet with(PreparedStatement ps) throws SQLException {
-        try{
-            return ps.executeQuery();
-        } catch (SQLException e) {
-            System.out.println(e);
-            throw e;
-        }
+  public ResultSet withResults(PreparedStatement ps) throws SQLException {
+    try{
+      return ps.executeQuery();
+    } catch (SQLException e) {
+      System.out.println(e);
+      throw e;
     }
+  }
+
+  public void withoutResults(PreparedStatement ps) throws SQLException {
+    try{
+      ps.execute();
+    } catch (SQLException e) {
+      System.out.println(e);
+      throw e;
+    }
+  }
 
 }
